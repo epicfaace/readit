@@ -3,7 +3,6 @@ $(function() {
 	window.question = new Question();
 
 	$("#start").click(function() {
-		window.qNumber = 0;
 		startQuestion();
 	});
 	window.qNumber = 0;
