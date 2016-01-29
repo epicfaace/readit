@@ -7,7 +7,7 @@ body {
     display: block;
 }
 
-#answerDiv, #showAnswer {
+#answerDiv, #showAnswer, #keepReading {
 	display:none;
 }
 

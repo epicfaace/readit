@@ -25,7 +25,7 @@ $(function() {
 		})
 
 		function startQuestion() {
-			$("#answerDiv,#showAnswer").hide();
+			$("#answerDiv,#keepReading,#showAnswer").hide();
 					if (qNumber > question.questions.length-1) qNumber = 0;
 		if (qNumber < 0) qNumber = question.questions.length-1;
 		if (typeof reader !== 'undefined') {
@@ -49,14 +49,18 @@ function Reader(curQuestion) {
 	});
 
 	$("#buzz").click(function() {
-		reader.sound.stop();
-		$("#showAnswer").show();
+		reader.sound.pause();
+		$("#keepReading,#showAnswer").show();
 	});
 
 	$("#showAnswer").click(function() {
 		$("#answer").text(curQuestion.answer);
 		$("#answerDiv").show();
 	});
+
+	$("#keepReading").click(function() {
+		reader.sound.play();
+	})
 
 
 }
