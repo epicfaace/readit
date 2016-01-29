@@ -1,0 +1,17 @@
+body {
+	padding:2%;
+}
+
+#buttonDiv {
+	margin-left:30%;
+    display: block;
+}
+
+#answerDiv, #showAnswer {
+	display:none;
+}
+
+#answer {
+	text-decoration: bold;
+	font-size:200%;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ReadIT question reader</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="./js/buzz.min.js"></script>
+
+</head>
+<body>
+
+<h1>ReadIT</h1>
+<h3>An audio quizbowl reader</h3>
+
+<div class="container">
+  <button type="button" id="start" class="btn">Start tossup</button> 
+
+
+<nav>
+  <ul class="pager">
+    <li><a href="#" id="prevQ">Previous</a></li>
+    <li>
+    	<select id="questionNum" class="form-control" style="max-width:30%;display:inline;">
+                    </select>
+    </li>
+    <li><a href="#" id="nextQ">Next</a></li>
+  </ul>
+</nav>
+
+<div id="buttonDiv">
+  <button type="button" id="buzz" class="btn-lg btn-primary">Buzz</button> 
+  <button type="button" id="showAnswer" class="btn-lg btn-warning">Show answer</button>
+</div>
+
+  <div id="answerDiv">
+  	<p>The answer is...<span id="answer"></span></p>
+  </form>
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
