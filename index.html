@@ -5,16 +5,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="./js/buzz.min.js"></script>
 
 </head>
 <body>
-
+<div id="all">
 <h1>ReadIT</h1>
-<h3>An audio quizbowl reader</h3>
+<span class="headline">An audio quizbowl reader</span>
 
 <div class="container">
   <button type="button" id="start" class="btn">Start tossup</button> 
@@ -31,9 +31,14 @@
   </ul>
 </nav>
 
-<div id="buttonDiv">
-  <button type="button" id="buzz" class="btn btn-primary">Buzz</button> 
-  <button type="button" id="keepReading" class="btn btn-danger">Neg (keep reading)</button>
+<div>
+  <a href="#" title="Play video" class="play"></a>
+</div>
+<div id="">
+
+
+  <!--button type="button" id="buzz" class="btn btn-primary">Buzz</button> 
+  <button type="button" id="keepReading" class="btn btn-danger">Neg (keep reading)</button-->
   <button type="button" id="showAnswer" class="btn btn-info">Show answer</button>
 </div>
 
@@ -43,6 +48,6 @@
 </div>
 
 <script src="main.js"></script>
-
+</div>
 </body>
 </html>

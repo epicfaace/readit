@@ -23,8 +23,19 @@ $(function() {
 			startQuestion();
 		})
 
+
+
+	/*var icon = $('.play');
+	icon.click(function() {
+	icon.toggleClass('active');
+		return false;
+	});*/
+
+});
+
 		function startQuestion() {
-			$("#answerDiv,#keepReading,#showAnswer").hide();
+				$(".play").addClass("active");
+			$("#answerDiv,#keepReading").hide();
 					if (qNumber > question.questions.length-1) qNumber = 0;
 		if (qNumber < 0) qNumber = question.questions.length-1;
 		if (typeof reader !== 'undefined') {
@@ -34,22 +45,25 @@ $(function() {
 		$("select#questionNum").val(qNumber);
 		}
 
-});
-
 function Reader(curQuestion) {
 	this.sound = new buzz.sound("./sounds/PACE 2015/"+curQuestion.url+".wav");
 	this.sound.play();
 
+	this.sound.bind("ended", function(e) {
+		$(".play").removeClass("active");
+	});
+	this.sound.bind("pause", function(e) {
+		$(".play").removeClass("active");
+	});
+	this.sound.bind("play", function(e) {
+		$(".play").addClass("active");
+	});
+
 	$('body').keyup(function(e){
 	   if(e.keyCode == 32){
 	       // user has pressed space
-	       $("#buzz").click();
+	       $(".play").click();
 	   }
-	});
-
-	$("#buzz").click(function() {
-		reader.sound.pause();
-		$("#keepReading,#showAnswer").show();
 	});
 
 	$("#showAnswer").click(function() {
@@ -57,12 +71,30 @@ function Reader(curQuestion) {
 		$("#answerDiv").show();
 	});
 
-	$("#keepReading").click(function() {
-		reader.sound.play();
-	})
-
 
 }
+function bindClicks() {
+	$("#keepReading, .play").not(".active").click(function() {
+		if ($(".play").hasClass("active")) {
+			reader.sound.pause();
+			$("#keepReading").show();
+
+		}
+		else {
+		if (typeof reader === 'undefined' || 
+			(reader.sound && reader.sound.isEnded())) {
+			//Console.log("yes");
+				startQuestion();
+			}
+			else {
+				reader.sound.play();
+			}
+		}
+		
+		return false;
+	});
+}
+bindClicks();
 
 function Question() {
 	this.questions = [
