@@ -46,7 +46,7 @@ $(function() {
 		}
 
 function Reader(curQuestion) {
-	this.sound = new buzz.sound("./sounds/PACE 2015/"+curQuestion.url+".wav");
+	this.sound = new buzz.sound("/sounds/PACE 2015/"+curQuestion.url+".wav");
 	this.sound.play();
 
 	this.sound.bind("ended", function(e) {
