@@ -6,22 +6,27 @@
 <span class="headline">An audio quizbowl reader</span>
 
 <div class="container">
-  <!button type="button" id="start" class="btn">Start tossup</button> 
-  <select id="selectSet">
+  <!--button type="button" id="start" class="btn">Start tossup</button--> 
+  Set: 
+  <select id="selectSet" class="form-control smallSelect">
   {% for i in sets %}
   <option>{{i}}</option>
   {% endfor %}
   </select>
+  Packet: 
+  <select id="packetSet" class="form-control smallSelect">
+  </select>
 
 <nav>
-  <ul class="pager">
+  <!--ul class="pager">
     <li><a href="#" id="prevQ">Previous</a></li>
     <li>
     	<select id="questionNum" class="form-control" style="max-width:30%;display:inline;">
         </select>
     </li>
     <li><a href="#" id="nextQ">Next</a></li>
-  </ul>
+  </ul-->
+   <ul id="pagination-demo" class="pagination-sm"></ul>
 </nav>
 
 <div>

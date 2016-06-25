@@ -33,20 +33,28 @@ $(function() {
 
 });
 
+
+ /*
+ DOC
+ http://esimakin.github.io/twbs-pagination/?a=&page=2&c=d
+ */
+
 		function startQuestion() {
-				$(".play").addClass("active");
-			$("#answerDiv,#keepReading").hide();
-					if (qNumber > question.questions.length-1) qNumber = 0;
-		if (qNumber < 0) qNumber = question.questions.length-1;
+		$(".play").addClass("active");
+		$("#answerDiv,#keepReading").hide();
+		//if (qNumber > question.questions.length-1) qNumber = 0;
+		//if (qNumber < 0) qNumber = question.questions.length-1;
 		if (typeof reader !== 'undefined') {
 				reader.sound.stop();
 				}
-		window.reader = new Reader(window.question.questions[qNumber]);
+		window.reader = new Reader(qNumber);
 		$("select#questionNum").val(qNumber);
 		}
 
-function Reader(curQuestion) {
-	this.sound = new buzz.sound("/sounds/PACE 2015/"+curQuestion.url+".wav");
+function Reader(number) {
+	this.sound = new buzz.sound("/getSound?set="+$("#selectSet").val()+
+		"&packet="+$("#packetSet").val()+
+		"&number="+number);
 	this.sound.play();
 
 	this.sound.bind("ended", function(e) {
@@ -67,7 +75,7 @@ function Reader(curQuestion) {
 	});
 
 	$("#showAnswer").click(function() {
-		$("#answer").text(curQuestion.answer);
+		$("#answer").text("Answer (todo)");
 		$("#answerDiv").show();
 	});
 
@@ -76,7 +84,8 @@ function Reader(curQuestion) {
 function bindClicks() {
 	$("#keepReading, .play").not(".active").click(function() {
 		if ($(".play").hasClass("active")) {
-			reader.sound.pause();
+			if (!reader.sound.isPaused)
+				reader.sound.pause();
 			$("#keepReading").show();
 
 		}
@@ -118,3 +127,32 @@ function Question() {
          );
 	}
 }
+
+$("#selectSet").change(updateList);
+
+function updateList() {
+	$.get("/list", {set: $("#selectSet").val()})
+	.done(function(results) {
+		for (i in results) {
+			$("#packetSet").html("");
+			$("<option>"+results[i]+"</option>").appendTo("#packetSet");
+		}
+		 $('#pagination-demo').twbsPagination({
+	        totalPages: 20,
+	        visiblePages: 5,
+	        onPageClick: function (event, page) {
+	        	window.qNumber = page;
+	            startQuestion();
+	        }
+	    });
+	})
+	.fail(function() {
+		alert("Sorry, there was an error");
+	});
+
+}
+
+$(function() {
+	updateList();
+
+});

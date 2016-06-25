@@ -29,6 +29,12 @@ div#all {
 	font-size:200%;
 }
 
+select.smallSelect {
+	@extend .form-control !optional;
+	max-width: 100px;
+	display:inline-block;
+}
+
 /*play pause buttons*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800);
 

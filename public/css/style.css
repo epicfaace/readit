@@ -23,6 +23,10 @@ div#all {
   text-decoration: bold;
   font-size: 200%; }
 
+select.smallSelect {
+  max-width: 100px;
+  display: inline-block; }
+
 /*play pause buttons*/
 body {
   background: #f9f9f9;
