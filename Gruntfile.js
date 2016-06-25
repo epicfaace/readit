@@ -48,8 +48,8 @@ module.exports = function (grunt) {
       },
       views: {
         files: [
-          'app/views/*.jade',
-          'app/views/**/*.jade'
+          'app/views/*.swig',
+          'app/views/**/*.swig'
         ],
         options: { livereload: reloadPort }
       }

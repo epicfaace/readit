@@ -1,0 +1,43 @@
+/*
+Error: Inconsistent indentation: "    \t" was used for indentation, but the rest of the document was indented using 2 spaces.
+        on line 27 of index.html
+
+22: 
+23: <nav>
+24:   <ul class="pager">
+25:     <li><a href="#" id="prevQ">Previous</a></li>
+26:     <li>
+27:     	<select id="questionNum" class="form-control" style="max-width:30%;display:inline;">
+28:                     </select>
+29:     </li>
+30:     <li><a href="#" id="nextQ">Next</a></li>
+31:   </ul>
+32: </nav>
+
+Backtrace:
+index.html:27
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:486:in `block in tabulate'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:444:in `each'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:444:in `each_with_index'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:444:in `tabulate'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:409:in `_to_tree'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:294:in `watch'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin.rb:109:in `method_missing'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:360:in `watch_or_update'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/exec/base.rb:52:in `parse'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/exec/base.rb:19:in `parse!'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/bin/sass:13:in `<top (required)>'
+/usr/local/bin/sass:23:in `load'
+/usr/local/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Inconsistent indentation: \"    \t\" was used for indentation, but the rest of the document was indented using 2 spaces.\A         on line 27 of index.html\A \A 22: \A 23: <nav>\A 24:   <ul class=\"pager\">\A 25:     <li><a href=\"#\" id=\"prevQ\">Previous</a></li>\A 26:     <li>\A 27:     	<select id=\"questionNum\" class=\"form-control\" style=\"max-width:30%;display:inline;\">\A 28:                     </select>\A 29:     </li>\A 30:     <li><a href=\"#\" id=\"nextQ\">Next</a></li>\A 31:   </ul>\A 32: </nav>"; }
