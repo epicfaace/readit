@@ -37,7 +37,7 @@ router.get('/getSound', function (req, res, next) {
     var stat = fs.statSync(filePath);
 
     res.writeHead(200, {
-        'Content-Type': 'audio/mpeg',
+        'Content-Type': 'audio/m4a',
         'Content-Length': stat.size
     });
 

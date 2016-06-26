@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <title>{{ title }}</title>
-  
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <!link href="/css/lib/bootstrap-responsive.css" rel="stylesheet">
@@ -16,6 +16,7 @@
   <script src="/js/lib/bootstrap.min.js"></script>
   <script src="/js/lib/buzz.min.js"></script>
   <script src="/js/lib/jquery.twbsPagination.min.js"></script>
+  <script src="http://cdn.binaryjs.com/0/binary.js"></script>
   {% block head %}{% endblock %}
 </head>
 <body>

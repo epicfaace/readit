@@ -19,15 +19,19 @@ $("#autoplayCheck").change(function() {
 				reader.sound.stop();
 				}
 		window.reader = new Reader(qNumber);
+      reader.sound.play();
 		//$("select#questionNum").val(qNumber);
 		}
 
 function Reader(number) {
 	this.sound = new buzz.sound("/getSound?set="+$("#selectSet").val()+
 		"&packet="+$("#selectPacket").val()+
-		"&number="+number);
-	this.sound.play();
-
+		"&number="+number, {
+    webAudioApi: true,
+    preload: true
+  });
+	this.sound.unmute().load().play();
+  console.log("1.3");
 	this.sound.bind("ended", function(e) {
 		if (!autoplay) {
 			$(".play").removeClass("active");
@@ -62,7 +66,7 @@ function Reader(number) {
 function bindClicks() {
 	$("#keepReading, .play").click(function() {
 		if ($(".play").hasClass("active")) {
-			if (!reader.sound.isPaused())
+			if (reader && reader.sound && !reader.sound.isPaused())
 				reader.sound.pause();
 			$("#keepReading").show();
 
@@ -72,6 +76,7 @@ function bindClicks() {
 			(reader.sound && reader.sound.isEnded())) {
 			//Console.log("yes");
 				startQuestion();
+
 			}
 			else {
 				reader.sound.play();
@@ -162,5 +167,11 @@ function clickPage() {
 
 $(function() {
 	updateList();
+
+});
+
+$("#test").click(function() {
+  window.reader = new Reader(qNumber);
+  reader.sound.play();
 
 });
