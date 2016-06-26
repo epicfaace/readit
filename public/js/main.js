@@ -1,8 +1,14 @@
+window.autoplay=$("#autoplayCheck").is(":checked");
+
+$("#autoplayCheck").change(function() {
+	window.autoplay = $(this).is(":checked");
+})
+
 $(function() {
 	window.qNumber = 0;
 	window.question = new Question();
 
-	$("#start").click(function() {
+	/*$("#start").click(function() {
 		startQuestion();
 	});
 	window.qNumber = 0;
@@ -16,7 +22,7 @@ $(function() {
 		$("#prevQ").click(function() {
 		window.qNumber --;
 		startQuestion();
-	});
+	});*/
 
 		$("select#questionNum").change(function() {
 			window.qNumber = $(this).val();
@@ -48,7 +54,7 @@ $(function() {
 				reader.sound.stop();
 				}
 		window.reader = new Reader(qNumber);
-		$("select#questionNum").val(qNumber);
+		//$("select#questionNum").val(qNumber);
 		}
 
 function Reader(number) {
@@ -58,7 +64,15 @@ function Reader(number) {
 	this.sound.play();
 
 	this.sound.bind("ended", function(e) {
-		$(".play").removeClass("active");
+		if (!autoplay) {
+			$(".play").removeClass("active");
+		}
+		else {
+			//qNumber++;
+			//startQuestion();
+			qNumber++;
+			clickPage();
+		}
 	});
 	this.sound.bind("pause", function(e) {
 		$(".play").removeClass("active");
@@ -76,15 +90,15 @@ function Reader(number) {
 
 	$("#showAnswer").click(function() {
 		$("#answer").text("Answer (todo)");
-		$("#answerDiv").show();
+		$("#answerDiv").toggle();
 	});
 
 
 }
 function bindClicks() {
-	$("#keepReading, .play").not(".active").click(function() {
+	$("#keepReading, .play").click(function() {
 		if ($(".play").hasClass("active")) {
-			if (!reader.sound.isPaused)
+			if (!reader.sound.isPaused())
 				reader.sound.pause();
 			$("#keepReading").show();
 
@@ -128,7 +142,11 @@ function Question() {
 	}
 }
 
-$("#selectSet").change(updateList);
+$("#selectSet").change(function() {
+	updateList();
+	startQuestion(); //hack to fix problem
+});
+$("#packetSet").change(updateList);
 
 function updateList() {
 	$.get("/list", {set: $("#selectSet").val()})
@@ -145,11 +163,20 @@ function updateList() {
 	            startQuestion();
 	        }
 	    });
+		 window.qNumber = 1;
+	     clickPage();
 	})
 	.fail(function() {
 		alert("Sorry, there was an error");
 	});
 
+}
+
+function clickPage() {
+
+	$("li.page").filter(function () {
+				return $(this).text() == qNumber;
+			}).click(); //bug: if equal to 1, does not change it.
 }
 
 $(function() {

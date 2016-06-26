@@ -44,10 +44,6 @@ router.get('/getSound', function (req, res, next) {
     var readStream = fs.createReadStream(filePath);
     // We replaced all the event handlers with a simple call to readStream.pipe()
     readStream.pipe(res);
-  //packets = removeHiddenFiles(packets);
-  //var question = packets[0];
-  //res.setHeader('Content-Type', 'application/json');
-  //res.send(packets);
 });
 
 function readDirCallback(err, files) {
