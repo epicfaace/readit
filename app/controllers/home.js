@@ -23,8 +23,19 @@ router.get('/list', function (req, res, next) {
   var setName = req.query.set;
   var packets = fs.readdirSync("./public/sounds/"+setName);
   packets = removeHiddenFiles(packets);
+  var lengths = [];
+  /*for (var packet in packets) {
+    var packetContents = fs.readdirSync("./public/sounds/"+setName+"/"+packets);
+  }*/
+  var packetContents = fs.readdirSync("./public/sounds/"+setName+"/1"); //assuming every packet has the same # of questions...
+  packetContents = removeHiddenFiles(packetContents);
+  var length = packetContents.length;
+  var responseJSON = {
+    "packets": packets,
+    "length": length
+  };
   res.setHeader('Content-Type', 'application/json');
-  res.send(packets);
+  res.send(responseJSON);
 });
 
 router.get('/getSound', function (req, res, next) {
