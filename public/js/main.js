@@ -1,42 +1,9 @@
 window.autoplay=$("#autoplayCheck").is(":checked");
 
+window.qNumber = 0;
+
 $("#autoplayCheck").change(function() {
 	window.autoplay = $(this).is(":checked");
-})
-
-$(function() {
-	window.qNumber = 0;
-	window.question = new Question();
-
-	/*$("#start").click(function() {
-		startQuestion();
-	});
-	window.qNumber = 0;
-	$("#nextQ").click(function() {
-		
-		window.qNumber++;
-		startQuestion();
-		
-	});
-
-		$("#prevQ").click(function() {
-		window.qNumber --;
-		startQuestion();
-	});*/
-
-		$("select#questionNum").change(function() {
-			window.qNumber = $(this).val();
-			startQuestion();
-		})
-
-
-
-	/*var icon = $('.play');
-	icon.click(function() {
-	icon.toggleClass('active');
-		return false;
-	});*/
-
 });
 
 
@@ -48,8 +15,6 @@ $(function() {
 		function startQuestion() {
 		$(".play").addClass("active");
 		$("#answerDiv,#keepReading").hide();
-		//if (qNumber > question.questions.length-1) qNumber = 0;
-		//if (qNumber < 0) qNumber = question.questions.length-1;
 		if (typeof reader !== 'undefined') {
 				reader.sound.stop();
 				}
@@ -59,7 +24,7 @@ $(function() {
 
 function Reader(number) {
 	this.sound = new buzz.sound("/getSound?set="+$("#selectSet").val()+
-		"&packet="+$("#packetSet").val()+
+		"&packet="+$("#selectPacket").val()+
 		"&number="+number);
 	this.sound.play();
 
@@ -68,9 +33,8 @@ function Reader(number) {
 			$(".play").removeClass("active");
 		}
 		else {
-			//qNumber++;
-			//startQuestion();
 			qNumber++;
+      //TODO: add some bounds handling here.
 			clickPage();
 		}
 	});
@@ -104,7 +68,7 @@ function bindClicks() {
 
 		}
 		else {
-		if (typeof reader === 'undefined' || 
+		if (typeof reader === 'undefined' ||
 			(reader.sound && reader.sound.isEnded())) {
 			//Console.log("yes");
 				startQuestion();
@@ -113,7 +77,7 @@ function bindClicks() {
 				reader.sound.play();
 			}
 		}
-		
+
 		return false;
 	});
 }
@@ -126,7 +90,7 @@ function Question() {
 		{"answer":"Crimean War",
 		"url":"tossup2"},
 		{"answer":"Plato",
-		"url":"tossup3"},
+		"url":"tossup3"}
 
 	];
 
@@ -144,27 +108,44 @@ function Question() {
 
 $("#selectSet").change(function() {
 	updateList();
-	startQuestion(); //hack to fix problem
+
 });
-$("#packetSet").change(updateList);
+$("#selectPacket").change(function() {
+  updateList();
+  window.qNumber = 1;
+  clickPage();
+  //startQuestion(); //does this.
+});
 
 function updateList() {
 	$.get("/list", {set: $("#selectSet").val()})
 	.done(function(results) {
 		for (i in results) {
-			$("#packetSet").html("");
-			$("<option>"+results[i]+"</option>").appendTo("#packetSet");
+			$("#selectPacket").html("");
+			$("<option>"+results[i]+"</option>").appendTo("#selectPacket");
 		}
 		 $('#pagination-demo').twbsPagination({
 	        totalPages: 20,
 	        visiblePages: 5,
+          initiateStartPageClick: false,
 	        onPageClick: function (event, page) {
 	        	window.qNumber = page;
 	            startQuestion();
 	        }
 	    });
-		 window.qNumber = 1;
-	     clickPage();
+      if (window.qNumber == 1) {
+        //if # is already 1, it actually starts the question in addition to just clicking the number.
+        //also works at the beginning (qNumber = 0).
+        startQuestion();
+      }
+      /*  else if (window.qNumber == 0) {
+        //on page load. do not want autoplay on page load (for mobile devices)
+        qNumber = 1;
+      }*/
+      else {
+        qNumber = 1;
+        clickPage();
+      }
 	})
 	.fail(function() {
 		alert("Sorry, there was an error");

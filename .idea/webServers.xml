@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8c0ac4ad-e9f0-4b24-898e-7bde167a30fc" name="https://github.com/epicfaace/readit.git">
+        <fileTransfer host="" port="21" password="dfd2dfccdfc4dfccdfc1dfc2dfdddf98" username="aramaswamis@gmail.com">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
